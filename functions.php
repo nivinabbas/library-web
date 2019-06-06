@@ -2,7 +2,11 @@
 session_start();
 
 // connect to database
+<<<<<<< HEAD
 $db = mysqli_connect('localhost', 'root', '', '');
+=======
+$db = mysqli_connect('localhost', 'root', '', 'library-web');
+>>>>>>> 45c25545fc42b72999f5bbe64cfb7e6850d1ddf1
 
 // variable declaration
 $username = "";
