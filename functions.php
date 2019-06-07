@@ -61,10 +61,11 @@
 				$_SESSION['success']  = "New user successfully created!!";
 				header('location: home.php');
 			}else{
+
 				$query = "INSERT INTO users (username, email, user_type, password) 
 						  VALUES('$username', '$email', 'user', '$password')";
-				mysqli_query($db, $query);
-
+				$resultSet = mysqli_query($db, $query);
+				
 				// get id of the created user
 				$logged_in_user_id = mysqli_insert_id($db);
 
@@ -225,7 +226,6 @@
 		if (count($errors) == 0) {
 
 			if (isset($_POST['serialNo'])) {
-				$user_type = e($_POST['user_type']);
 				$query = "INSERT INTO books (serialNo, name, category, reserved) 
 						  VALUES('$serialNo', '$name', '$category', '$reserved')";
 				mysqli_query($db, $query);
