@@ -43,7 +43,7 @@
 			<input type="checkbox" name="reserved" value="<?php echo $reserved; ?>">
 		</div>
 		<div class="input-group">
-			<input type="submit"/>
+			<input type="button" value="submit"/>
 		</div>
 	</form>
 </body>

@@ -103,16 +103,6 @@
 		if (empty($password)) {
 			array_push($errors, "Password is required");
 		}
-<<<<<<< HEAD
-	
-		// attempt login if no errors on form
-		if (count($errors) == 0) {
-			$password = md5($password);
-	
-			$query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
-			$results = mysqli_query($db, $query);
-	
-=======
 
 		// attempt login if no errors on form
 		if (count($errors) == 0) {
@@ -121,27 +111,16 @@
 			$query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
 			$results = mysqli_query($db, $query);
 
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
 			if (mysqli_num_rows($results) == 1) { // user found
 				// check if user is admin or user
 				$logged_in_user = mysqli_fetch_assoc($results);
 				if ($logged_in_user['user_type'] == 'admin') {
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
 					$_SESSION['user'] = $logged_in_user;
 					$_SESSION['success']  = "You are now logged in";
 					header('location: admin/home.php');		  
 				}else{
 					$_SESSION['user'] = $logged_in_user;
 					$_SESSION['success']  = "You are now logged in";
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
 					header('location: index.php');
 				}
 			}else {
@@ -149,8 +128,6 @@
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
 
 	function isLoggedIn()
 	{
@@ -161,7 +138,6 @@
 		}
 	}
 
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
 	function isAdmin()
 	{
 		if (isset($_SESSION['user']) && $_SESSION['user']['user_type'] == 'admin' ) {
@@ -170,9 +146,6 @@
 			return false;
 		}
 	}
-<<<<<<< HEAD
-}	
-=======
 
 	// escape string
 	function e($val){
@@ -261,4 +234,3 @@
 
 
 ?>
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
