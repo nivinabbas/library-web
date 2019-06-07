@@ -1,32 +1,34 @@
-<<<<<<< HEAD
 <?php 
-    include('functions.php');
-    function isLoggedIn()
-{
-	if (isset($_SESSION['user'])) {
-		return true;
-	}else{
-		return false;
-	}
-}
-=======
+include('../functions.php');
 
-<?php 
-    include('functions.php');
-    if (!isLoggedIn()) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: login.php');}
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
+if (!isAdmin()) {
+	$_SESSION['msg'] = "You must log in first";
+	header('location: ../login.php');
+}
+
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['user']);
+	header("location: ../login.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<style>
+	.header {
+		background: #003366;
+	}
+	button[name=register_btn] {
+		background: #003366;
+	}
+	</style>
 </head>
 <body>
 	<div class="header">
-		<h2>Home Page</h2>
+		<h2>Admin - Home Page</h2>
 	</div>
 	<div class="content">
 		<!-- notification message -->
@@ -40,9 +42,10 @@
 				</h3>
 			</div>
 		<?php endif ?>
+
 		<!-- logged in user information -->
 		<div class="profile_info">
-			<img src="images/user_profile.png"  >
+			<img src="../images/admin_profile.png"  >
 
 			<div>
 				<?php  if (isset($_SESSION['user'])) : ?>
@@ -51,11 +54,8 @@
 					<small>
 						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
 						<br>
-<<<<<<< HEAD
-						<a href="index.php?logout='1'" style="color: red;">logout</a>
-=======
-                        <a href="index.php?logout='1'" style="color: red;">logout</a>
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
+						<a href="home.php?logout='1'" style="color: red;">logout</a>
+                       &nbsp; <a href="create_user.php"> + add user</a>
 					</small>
 
 				<?php endif ?>
