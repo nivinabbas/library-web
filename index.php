@@ -1,22 +1,9 @@
-<<<<<<< HEAD
-<?php 
-    include('functions.php');
-    function isLoggedIn()
-{
-	if (isset($_SESSION['user'])) {
-		return true;
-	}else{
-		return false;
-	}
-}
-=======
 
 <?php 
     include('functions.php');
     if (!isLoggedIn()) {
         $_SESSION['msg'] = "You must log in first";
         header('location: login.php');}
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,11 +38,7 @@
 					<small>
 						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
 						<br>
-<<<<<<< HEAD
-						<a href="index.php?logout='1'" style="color: red;">logout</a>
-=======
                         <a href="index.php?logout='1'" style="color: red;">logout</a>
->>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
 					</small>
 
 				<?php endif ?>
