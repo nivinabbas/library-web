@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="header">
-		<h2>Admin - create book</h2>
+		<h2>add new book to library</h2>
 	</div>
 	
 	<form method="post" action="create_book.php">
@@ -23,11 +23,11 @@
 
 		<div class="input-group">
 			<label>serialNo</label>
-			<input type="text" name="serialNo" value="<?php echo $serialNo; ?>">
+			<input type="text" name="serialNo" value="">
 		</div>
 		<div class="input-group">
 			<label>Name</label>
-			<input type="name" name="name" value="<?php echo $name; ?>">
+			<input type="name" name="name" value="">
 		</div>
 		<div class="input-group">
 			<label>Category</label>
@@ -41,6 +41,9 @@
 		<div class="input-group">
 			<label>Reserved</label>
 			<input type="checkbox" name="reserved" value="<?php echo $reserved; ?>">
+		</div>
+		<div class="input-group">
+			<input type="submit"/>
 		</div>
 	</form>
 </body>
