@@ -191,5 +191,74 @@
 		}
 	}
 
+
+
+
+
+
+
+	// REGISTER Book
+	function registerBook(){
+		global $db, $errors;
+
+		// receive all input values from the form
+		$serialNo    =  e($_POST['serialNo']);
+		$name =  e($_POST['name']);
+		$category      =  e($_POST['category']);
+		$reserved =  e($_POST['reserved']);
+
+		// form validation: ensure that the form is correctly filled
+		if (empty($serialNo)) { 
+			array_push($errors, "serialNo is required"); 
+		}
+		if (empty($name)) { 
+			array_push($errors, "name is required"); 
+		}
+		if (empty($category)) { 
+			array_push($errors, "category is required"); 
+		}
+		if (empty($reserved)){
+			array_push($errors, "category is required");
+		}
+
+		// register book if there are no errors in the form
+		if (count($errors) == 0) {
+
+			if (isset($_POST['serialNo'])) {
+				$user_type = e($_POST['user_type']);
+				$query = "INSERT INTO books (serialNo, name, category, reserved) 
+						  VALUES('$serialNo', '$name', '$category', '$reserved')";
+				mysqli_query($db, $query);
+				$_SESSION['success']  = "New book successfully created!!";
+				header('location: home.php');
+			}else{
+				$query = "INSERT INTO books (serialNo, name, category, reserved) 
+							VALUES('$serialNo', '$name', '$category', '$reserved')";
+				mysqli_query($db, $query);
+
+				// get id of the created user
+				$logged_in_book_id = mysqli_insert_id($db);
+
+				$_SESSION['serialNo'] = getUserById($logged_in_book_id); // put logged in book in session
+				$_SESSION['success']  = "You are now logged in";
+				header('location: index.php');				
+			}
+
+		}
+
+	}
+
+	// return book array from their id
+	function getBookById($serialNo){
+		global $db;
+		$query = "SELECT * FROM books WHERE id=" . $serialNo;
+		$result = mysqli_query($db, $query);
+
+		$book = mysqli_fetch_assoc($result);
+		return $book;
+	}
+
+
+
 ?>
 >>>>>>> b90187c3cc9f5da5a81ab76c9a82c5ab696a7f7f
