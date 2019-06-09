@@ -23,28 +23,36 @@
 
 		<div class="input-group">
 			<label>serialNo</label>
-			<input type="text" name="serialNo" value="">
+			<input type="text" name="serialNo" value="<?php echo $serialNo; ?>">
 		</div>
 		<div class="input-group">
 			<label>Name</label>
-			<input type="name" name="name" value="">
+			<input type="name" name="name" value="<?php echo $name; ?>">
 		</div>
 		<div class="input-group">
 			<label>Category</label>
 			<select name="category" id="category" >
-				<option value=""></option>
+				<option value="no"></option>
 				<option value="Engineering">Engineering</option>
 				<option value="Medical">Medical</option>
                 <option value="Sport">Sport</option>
+				<option value="Another">Another</option>
 			</select>
 		</div>
 		<div class="input-group">
 			<label>Reserved</label>
 			<input type="checkbox" name="reserved" value="<?php echo $reserved; ?>">
 		</div>
+		<div>
+		Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload" value="<?php echo $fileToUpload; ?>">
+    <input type="submit" value="Upload Image" name="submit" >
+	</div>
+	
 		<div class="input-group">
-			<input type="button" value="submit"/>
+			<button type="submit" class="btn" name="add_book"> + Add Book</button>
 		</div>
-	</form>
+	</form>	
+		
 </body>
 </html>
