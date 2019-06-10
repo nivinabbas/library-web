@@ -1,13 +1,12 @@
-<?php include './functions.php'?>
-
+<?php include '../functions.php'?>
 <?php
-if(!isset($_SESSION['user'])) header("location: ./login.php");
+if(!isset($_SESSION['user'])) header("location: ../login.php");
 ?>
 <?php
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['user']);
-	header("location: ./index.html");
+	header("location: ../index.html");
 }
 
 ?>
@@ -75,7 +74,7 @@ if (isset($_GET['logout'])) {
   transition-duration: 0.4s;
   cursor: pointer;
   border-radius:8px;
-  width:100%;
+  width:70px;
 }
 
 .button1Local {
@@ -97,22 +96,6 @@ if (isset($_GET['logout'])) {
   color: #fff;
   transform: translateY(-7px);
 }
-
-.buttonLocallogout {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius:8px;
-  width:80px;
-}
 </style>
   </head>
   <body>
@@ -120,9 +103,10 @@ if (isset($_GET['logout'])) {
     <nav style="background-image: linear-gradient(to right, #7e32fb 0%, #9733EE 51%, #7e32fb 100%)">
       
         <a class="navbar-brand" href="index.html">
-          <img src="main/img/elibrarylogo.png" alt="" height="50px" width="100px" />
+          <img src="../main/img/elibrarylogo.png" alt="" height="50px" width="100px" />
         </a>
-        <a  style="float:right;margin-left:24px;" href="books.php?logout='1'"  class="buttonLocallogout">Logout!</a>
+        <a  style="float:right;margin-left:24px;" href="books.php?logout='1'"  class="buttonLocal">Logout!</a>
+        
       </nav>
     
   </header>
@@ -131,29 +115,50 @@ if (isset($_GET['logout'])) {
 
       <div class="row">
       <?php
-       getBooksViews();?>
+        $books = listAdminBooks();
+        $reserved = "";
+        for ($i = 0; $i < sizeof($books); $i++) {
+            if($books[$i][3] == 1) $reserved = '<h1>Reserved!</h1>';
+            else $reserved='';
+echo '<div class="col-md-3" style="margin:8px;">
+                <div class="card">
+                <img height="200px" width="100%" src="../uploads/'.$books[$i][4].'">
+                
+                  <div class="container">
+                  
+                    <h4><b>' . $books[$i][1] . '</b></h4>
+                    <p>' . $books[$i][2] . '</p>
+                    '.$reserved.'
+                  </div>
+                </div>
+            </div>';
+        }
+?>
 
 <?php 
 
  if(isset($_GET['id'])){
   reserve();
-  header('location: books.php');
  }
  
 
  function reserve(){
    $id =  $_GET['id'];
    $db = mysqli_connect('localhost', 'root', '', 'E-library');
-   $query = "UPDATE books SET reserved =1 , user_id={$_SESSION["user"]["id"]} where serialNo =".$id; 
-         
-        echo $query;
-        mysqli_query($db, $query);
+  $query = "UPDATE  books SET reserved = 1 where serialNo =".$id;
+  mysqli_query($db, $query);
  }
 
 ?>
       </div>
     </div>
-
+   <button onClick="phpcall();"></button>
+    <script>
+    function phpcall(){
+      let btn = document.getElementById('reserve');
+      let excec = <?php reserve(btn);?>
+    }
+    </script>
 
     
 
@@ -172,4 +177,3 @@ if (isset($_GET['logout'])) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-

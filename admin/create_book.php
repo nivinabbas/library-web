@@ -39,10 +39,6 @@
 				<option value="Another">Another</option>
 			</select>
 		</div>
-		<div class="input-group">
-			<label>Reserved</label>
-			<input type="checkbox" name="reserved" value="<?php echo $reserved; ?>">
-		</div>
 		<div>
 		Select image to upload:
 		<input type="file" name="file">

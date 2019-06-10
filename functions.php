@@ -28,6 +28,10 @@ if (isset($_POST['add_book'])) {
     registerBook();
 }
 
+if (isset($_POST['reserve_book'])) {
+    reserve();
+}
+
 if (isset($_GET['logout'])) {
     session_destroy();
     unset($_SESSION['user']);
@@ -68,7 +72,7 @@ function register()
 						  VALUES('$username', '$email', '$user_type', '$password')";
             mysqli_query($db, $query);
             $_SESSION['success'] = "New user successfully created!!";
-            header('location: home.php');
+            header('location: books.php');
         } else {
 
             $query = "INSERT INTO users (username, email, user_type, password)
@@ -80,7 +84,7 @@ function register()
 
             $_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
             $_SESSION['success'] = "You are now logged in";
-            header('location: index.php');
+            header('location: books.php');
         }
 
     }
@@ -259,6 +263,21 @@ function getBookById($serialNo)
 function listBooks()
 {
     global $db;
+    $query = "SELECT * FROM books where reserved=0";
+	$result = mysqli_query($db, $query);
+	$books=array(); 
+	while($row = mysqli_fetch_array($result))
+	{
+		array_push($books,$row);	
+
+	}
+	
+    return $books;
+}
+
+
+function listAdminBooks(){
+    global $db;
     $query = "SELECT * FROM books";
 	$result = mysqli_query($db, $query);
 	$books=array(); 
@@ -282,6 +301,26 @@ function arrayImage(){
 	
 
 }
+
+function getBooksViews(){
+    $books = listBooks();
+    for ($i = 0; $i < sizeof($books); $i++) {
+
+    
+echo '<div class="col-md-3" style="margin:8px;">
+            <div class="card">
+            <img height="200px" width="100%" src="uploads/'.$books[$i][4].'">
+            
+              <div class="container">
+              
+                <h4><b>' . $books[$i][1] . '</b></h4>
+                <p>' . $books[$i][2] . '</p>
+              </div>
+              <a href="?id='.$books[$i][0].'"   class="buttonLocal btn-grad">Reserve!</a>
+            </div>
+        </div>';
+    }
+   }
 
 
 function myfunc()
