@@ -45,7 +45,7 @@
 		</div>
 		<div>
 		Select image to upload:
-		<input type="file" name="image">
+		<input type="file" name="file">
 	</div>
 	
 		<div class="input-group">

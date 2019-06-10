@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>books</title>
+    <link rel="stylesheet" href="main/css/linearicons.css" />
+  <link rel="stylesheet" href="main/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="main/css/bootstrap.css" />
+  <link rel="stylesheet" href="main/css/magnific-popup.css" />
+  <link rel="stylesheet" href="main/css/owl.carousel.css" />
+  <link rel="stylesheet" href="main/css/nice-select.css">
+  <link rel="stylesheet" href="main/css/hexagons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
+  <link rel="stylesheet" href="main/css/main.css" />
     <style>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -41,10 +50,55 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+.buttonLocal {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius:8px;
+  width:100%;
+}
+
+.button1Local {
+  background-color: #a836e8; 
+  color: black; 
+  border: 2px solid #7d31fb;
+}
+.button1Local:hover{
+  background-color: #a836e8;
+  color: white;
+}
+.btn-grad {background-image: linear-gradient(to right, #7e32fb 0%, #9733EE 51%, #7e32fb 100%)}
+.btn-grad:hover { background-position: right center;color:white; }
+
+
+.buttonLocal:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
 </style>
   </head>
   <body>
-    <div class="" style="margin:8px;">
+  <header class="">
+    <nav style="background-image: linear-gradient(to right, #7e32fb 0%, #9733EE 51%, #7e32fb 100%)">
+      
+        <a class="navbar-brand" href="index.html">
+          <img src="main/img/elibrarylogo.png" alt="" height="50px" width="100px" />
+        </a>
+      </nav>
+    
+  </header>
+
+  <section >
 
       <div class="row">
       <?php
@@ -54,14 +108,14 @@
         
 echo '<div class="col-md-3" style="margin:8px;">
                 <div class="card">
+                <img height="200px" width="100%" src="uploads/'.$books[$i][4].'">
                 
-                <h3> '.$books[$i][4].'</h3>
                   <div class="container">
                   
                     <h4><b>' . $books[$i][1] . '</b></h4>
                     <p>' . $books[$i][2] . '</p>
                   </div>
-                  <input type="button" class="button" onclick="myfunc()" value="Click!" />
+                  <a href="/library-web/login.php" class="buttonLocal btn-grad">Reserve!</a>
                 </div>
             </div>';
         }
@@ -69,7 +123,7 @@ echo '<div class="col-md-3" style="margin:8px;">
       </div>
     </div>
 
-
+    </section>
 
 
 

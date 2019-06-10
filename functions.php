@@ -189,18 +189,18 @@ function registerBook()
 	$option = isset($_POST['category']) ? $_POST['category'] : false;
 	if($option)
     $category = $_POST['category'];
-    $path = $_FILES['image']['name'];
-    echo $file = $_FILES['image']['name'];
+    $path = $_FILES['file']['name'];
+    echo $file = $_FILES['file']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     // Get image name
-    $img =rand().basename( $_FILES['image']['name']);
+    $img =rand().basename( $_FILES['file']['name']);
     echo $img;
     $baseTarget = dirname(__DIR__).'/'."library-web/uploads/";
-    $target=$baseTarget.$img.'.'.$ext;
+    $target=$baseTarget.$img;
     echo $target;
     chmod($baseTarget,0777);
-    echo $file = $_FILES['image']['tmp_name'];
-  	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+    echo $file = $_FILES['file']['tmp_name'];
+  	if (move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
           $msg = "Image uploaded successfully";
           echo $msg;
   	}else{
@@ -224,13 +224,13 @@ function registerBook()
 
         if (isset($_POST['serialNo'])) {
             $query = "INSERT INTO books (serialNo, name, category,fileToUpload)
-						  VALUES('$serialNo', '$name', '$category','$target')";
+						  VALUES('$serialNo', '$name', '$category','$img')";
             mysqli_query($db, $query);
             $_SESSION['success'] = "New book successfully created!!";
-           // header('location: home.php');
+            header('location: home.php');
         } else {
             $query = "INSERT INTO books (serialNo, name, category,fileToUpload)
-							VALUES('$serialNo', '$name', '$category','$target')";
+							VALUES('$serialNo', '$name', '$category','$img')";
             mysqli_query($db, $query);
 
             // get id of the created user
@@ -238,7 +238,7 @@ function registerBook()
 
             $_SESSION['serialNo'] = getUserById($logged_in_book_id); // put logged in book in session
             $_SESSION['success'] = "You are now logged in";
-           // header('location: index.php');
+           header('location: index.php');
         }
 
     }
