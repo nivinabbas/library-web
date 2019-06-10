@@ -31,6 +31,34 @@
   <link rel="stylesheet" href="main/css/hexagons.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" />
   <link rel="stylesheet" href="main/css/main.css" />
+  <style>
+  .buttonLocal {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius:16px;
+  width:100%;
+}
+
+.button1Local {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #7d31fb;
+}
+.button1Local:hover{
+  background-color: #a836e8;
+  color: white;
+}
+  </style>
 </head>
 
 <body>
@@ -70,42 +98,24 @@
   <!-- ================ End banner Area ================= -->
 
   <!-- ================ Start Feature Area ================= -->
-  <section class="feature-area">
+  <section class="feature-area" style="margin-top:-180px;">
     <div class="container-fluid">
-      <div class="feature-inner row">
-        <div class="col-lg-2 col-md-6">
-          <div class="feature-item d-flex">
-            <i class="ti-book"></i>
-            <div class="ml-20">
-              <h4>New Classes</h4>
-              <p>
-                In the history of modern astronomy, there is probably no one greater leap forward.
-              </p>
+      <div class=" row">
+        <div class="col-md-2">
+          
+            <div >
+              <a href="/library-web/login.php" class="buttonLocal button1Local">Login</a>
             </div>
-          </div>
+        
         </div>
-        <div class="col-lg-2 col-md-6">
-          <div class="feature-item d-flex">
-            <i class="ti-cup"></i>
-            <div class="ml-20">
-              <h4>Top Courses</h4>
-              <p>
-                In the history of modern astronomy, there is probably no one greater leap forward.
-              </p>
+        <div class="col-md-2">
+          
+            <div >
+              <a href="/library-web/signup.php" class="buttonLocal button1Local">SignUp</a>
             </div>
-          </div>
+        
         </div>
-        <div class="col-lg-2 col-md-6">
-          <div class="feature-item d-flex border-right-0">
-            <i class="ti-desktop"></i>
-            <div class="ml-20">
-              <h4>Full E-Books</h4>
-              <p>
-                In the history of modern astronomy, there is probably no one greater leap forward.
-              </p>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   </section>
