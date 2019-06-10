@@ -18,7 +18,7 @@
 		<h2>add new book to library</h2>
 	</div>
 	
-	<form method="post" action="create_book.php">
+	<form method="post" action="" enctype="multipart/form-data">
     <?php echo display_error(); ?>
 
 		<div class="input-group">
@@ -45,8 +45,7 @@
 		</div>
 		<div>
 		Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload" value="<?php echo $fileToUpload; ?>">
-    <input type="submit" value="Upload Image" name="submit" >
+		<input type="file" name="image">
 	</div>
 	
 		<div class="input-group">

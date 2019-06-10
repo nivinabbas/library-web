@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+// $path = dirname(__DIR__).'/'."library-web/login.php";
+// chmod($path,0777);
 // connect to database
 $db = mysqli_connect('localhost', 'root', '', 'E-library');
 
@@ -32,7 +33,6 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['user']);
     header("location: ../login.php");
 }
-
 // REGISTER USER
 function register()
 {
@@ -188,7 +188,25 @@ function registerBook()
 	$name = e($_POST['name']);
 	$option = isset($_POST['category']) ? $_POST['category'] : false;
 	if($option)
-	$category = $_POST['category'];
+    $category = $_POST['category'];
+    $path = $_FILES['image']['name'];
+    echo $file = $_FILES['image']['name'];
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
+    // Get image name
+    $img =rand().basename( $_FILES['image']['name']);
+    echo $img;
+    $baseTarget = dirname(__DIR__).'/'."library-web/uploads/";
+    $target=$baseTarget.$img.'.'.$ext;
+    echo $target;
+    chmod($baseTarget,0777);
+    echo $file = $_FILES['image']['tmp_name'];
+  	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+          $msg = "Image uploaded successfully";
+          echo $msg;
+  	}else{
+          $msg = "Failed to upload image";
+          echo $msg;
+  	}
 
     // form validation: ensure that the form is correctly filled
     if (empty($serialNo)) {
@@ -205,14 +223,14 @@ function registerBook()
     if (count($errors) == 0) {
 
         if (isset($_POST['serialNo'])) {
-            $query = "INSERT INTO books (serialNo, name, category)
-						  VALUES('$serialNo', '$name', '$category')";
+            $query = "INSERT INTO books (serialNo, name, category,fileToUpload)
+						  VALUES('$serialNo', '$name', '$category','$target')";
             mysqli_query($db, $query);
             $_SESSION['success'] = "New book successfully created!!";
-            header('location: home.php');
+           // header('location: home.php');
         } else {
-            $query = "INSERT INTO books (serialNo, name, category)
-							VALUES('$serialNo', '$name', '$category')";
+            $query = "INSERT INTO books (serialNo, name, category,fileToUpload)
+							VALUES('$serialNo', '$name', '$category','$target')";
             mysqli_query($db, $query);
 
             // get id of the created user
@@ -220,7 +238,7 @@ function registerBook()
 
             $_SESSION['serialNo'] = getUserById($logged_in_book_id); // put logged in book in session
             $_SESSION['success'] = "You are now logged in";
-            header('location: index.php');
+           // header('location: index.php');
         }
 
     }
